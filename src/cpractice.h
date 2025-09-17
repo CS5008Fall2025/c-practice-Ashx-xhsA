@@ -1,6 +1,6 @@
 /**
- * Student Name:
- * Semester:
+ * Student Name:Zhanyi Chen(Ash as preferred name)
+ * Semester:2025 Fall
  * 
  * C Practice
  * This assignment is to help you practice using C. Is is setup to
