@@ -2,7 +2,7 @@
 
 # Homework - C Practice - Readme
 
-Name: Zhanyi Chen(Ash)
+Name: Zhanyi Chen
 
 Link to Assignment on Github: https://github.com/CS5008Fall2025/c-practice-Ashx-xhsA
 

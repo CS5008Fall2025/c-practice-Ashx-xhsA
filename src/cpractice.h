@@ -46,7 +46,9 @@ typedef struct {
  * of the variables in the calling function. 
 **/
 void swap(int *a, int *b){
-
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 /**
@@ -88,7 +90,29 @@ void print_array(int *arr, int size)
  * here is a quick list of numbers: https://www.math.net/list-of-fibonacci-numbers
  **/
 int* create_array_of_ints_fib(int size){
-    return NULL;
+    
+    if(size <= 0){
+        return NULL;
+    }
+    
+    int *fib = malloc(size * sizeof(int)); 
+    
+    if(size == 1){
+        fib[0] = 1;
+        return fib;
+    }
+    if(size == 2){
+        fib[0] = 1;
+        fib[1] = 1;
+        return fib;
+    }
+    fib[0] = 1;
+    fib[1] = 1;
+    for(int i = 2; i < size; i++){
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
+    return fib;
+
 }
 
 /**
@@ -101,6 +125,9 @@ int* create_array_of_ints_fib(int size){
  * Consider using swap. 
 */
 void reverse_array(int *arr, int size){
+    for(int i = 0; i < size / 2; i++){
+        swap(&arr[i],&arr[size-i-1]);
+    }
     
 }
 
@@ -115,7 +142,11 @@ void reverse_array(int *arr, int size){
  * 
 */
 int* double_array_size(int *arr, int size){
-    return NULL;
+    int* newarray = (int*) calloc(size * 2, sizeof(int));
+    for (int i = 0; i < size; i++){
+        newarray[i] = arr[i];
+    }
+    return newarray;
 }
 
 /**
@@ -143,7 +174,27 @@ int* double_array_size(int *arr, int size){
  * to get an OB1 error!
  */
 int* copy_array_start_end_loop(int *arr, int size, int start, int end, int *new_size) {
-    return NULL;
+    if(start >= size || end >= size || start < 0 || end < 0){
+        return NULL;
+    }
+    
+    if(start <= end){
+        *new_size = end - start + 1;
+    }
+    
+    if (start > end){
+        *new_size = size -start + end + 1;
+    }
+    
+    int *new_array = (int*) calloc(*new_size, sizeof(int)); 
+    for(int i = 0; i < *new_size; i++ ){
+        if (start>= size){
+            start = start % size;
+        }
+        new_array[i] = arr[start];
+        start ++;
+    }
+    return new_array;
 }
 
 /* 
@@ -155,7 +206,14 @@ Practice with struts
  * and returns the new point
 */
 Point* create_point(int x, int y){
-    return NULL;
+    Point *point = (Point *)malloc(sizeof(Point));
+    if (point == NULL){
+        return NULL;
+    }
+    point -> x = x;
+    point -> y = y;
+
+    return point;
 }
 
 /**
@@ -166,7 +224,10 @@ Point* create_point(int x, int y){
  * the point values. it is just a polygon of eventual size, and an array of empty points. 
 */
 Polygon* create_polygon(int size){
-    return NULL;
+    Polygon *polygon = malloc(sizeof(Polygon));
+    polygon -> size = size;
+    polygon->points = (Point**)malloc(size * sizeof(Point*));
+    return polygon;
 }
 
 
@@ -175,7 +236,13 @@ Polygon* create_polygon(int size){
  * all the points, to free them, free the array, and then free the polygon itself.
 */
 void free_polygon(Polygon *p){
-    
+    int size = p ->size;
+    Point** points = p->points;
+    for(int i=0; i <size; i++){
+        free(points[i]);
+    }
+    free(points);
+    free(p);
 }
 
 /**
@@ -188,9 +255,18 @@ void free_polygon(Polygon *p){
  * 0, height
 */
 Polygon* create_rectangle(int width, int height){
-    return NULL;
-}
+    if(width == 0 || height == 0){
+        return NULL;
+    }
+    Polygon *rectangle = create_polygon(4);
+    Point** points = rectangle -> points;
+    points[0] = create_point(0,0);
+    points[1] = create_point(width,0);
+    points[2] = create_point(width,height);
+    points[3] = create_point(0,height);
 
+    return rectangle;
+}
 
 /**
  * Creates a (right) triangle of width and height, using the polygon struct and returns it.
@@ -201,7 +277,16 @@ Polygon* create_rectangle(int width, int height){
  * width, height
 */
 Polygon* create_triangle(int width, int height){
-    return NULL;
+    if(width == 0 || height == 0){
+        return NULL;
+    }
+    Polygon *tri = create_polygon(3);
+    Point** points = tri-> points;
+    points[0] = create_point(0,0);
+    points[1] = create_point(width,0);
+    points[2] = create_point(width,height);
+
+    return tri;
 }
 
 /**
@@ -235,7 +320,16 @@ void print_polygon(Polygon *p){
  * after area is summed across all points, divide by 2.0 and return the area.
 */
 double calculate_polygon_area(Polygon *p){
-    return 0.0;
+    if(p == NULL){
+        return 0;
+    }
+    double area = 0;
+    Point** points = p ->points;
+    for(int i=0; i < p->size; i++){
+        int j = (i + 1)%(p->size);
+        area +=  (points[i]->x) * (points[j]->y) - (points[j]->x) * (points[i]->y);
+    }
+    return area/2.0;
 }
 
 #endif // C_PRACTICE_H
