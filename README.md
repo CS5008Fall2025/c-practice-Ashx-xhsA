@@ -7,11 +7,14 @@ Name: Zhanyi Chen
 Link to Assignment on Github: https://github.com/CS5008Fall2025/c-practice-Ashx-xhsA
 
 How many hours did it take you to complete this assignment (estimate)?
+6
 
 Did you collaborate with any other students/TAs/Professors? If so, tell us who and in what capacity.
-
-- one per row, add more if needed
+No
 
 Did you use any external resources (you do not have to cite in class material)? (Cite them below)
 
-- one row per resource
+- W3Schools. 2025. C Structures (structs). Retrieved September 30, 2025 from <https://www.w3schools.com/c/c_structs.php>
+- W3Schools. 2025. C Pointers and Arrays. Retrieved September 30, 2025 from <https://www.w3schools.com/c/c_pointers_arrays.php>
+
+- Bilibili. 2024. 【通俗 C 语言讲解】非常易懂！在宿舍教舍友指针实录 [Easy C Language Tutorial: Teaching Roommates about Pointers]. Video. Retrieved September 30, 2025 from <https://www.bilibili.com/video/BV1MH4y1u7uE/>
